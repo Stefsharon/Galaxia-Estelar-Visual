@@ -21,6 +21,5 @@ Este proyecto fue creado con **Svelte**, **D3**, **HTML** y **CSS**, y busca com
 - HTML/CSS
 - Git + GitHub
 
-## 🔮 En desarrollo...
 
 Hecho con 💜 por Steffy.
