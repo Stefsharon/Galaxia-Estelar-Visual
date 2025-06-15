@@ -65,6 +65,9 @@
         { id: 9, name: "Francisco Corigliano", subject: "Historia Occidental", year: 2022, like: 8, difficulty: 1, recommended: "Sí", mood: "Interesante", x: 70, y: 47.5, gender: "male",
             description: "Un viaje fascinante por la historia de Occidente, conectando el pasado con el presente de una manera que te hará reflexionar.",
             phrase: "El pasado es la brújula del futuro." },
+           { id: 22, name: "Joaquín Navajas", subject: "Neurociencias", year: 2023, like: 8, difficulty: 6, recommended: "Sí", mood: "Interesante", x: 80, y: 47.5, gender: "male", 
+        description: "Un especialista en neurociencias y psicología experimental, sus clases ofrecen una perspectiva profunda sobre el funcionamiento de la mente y el comportamiento humano, con casos de estudio muy interesantes.",
+        phrase: "La mente es un vasto universo de posibilidades." },
 
         // LIKE 7: (Usar 56.5 para todas)
         { id: 16, name: "Javier Fuentes", subject: "Contabilidad", year: 2023, like: 7, difficulty: 5, recommended: "Sí", mood: "Interesante", x: 30, y: 56.5, gender: "male",
@@ -308,120 +311,206 @@ function getRankedStars() {
         });
         return htmlContent;
     }
+// Genera el SVG del avatar basado en la materia y género
+function generateProfessorAvatarSvg(professor) {
 
-    // Genera el SVG del avatar basado en la materia y género
-    function generateProfessorAvatarSvg(professor) {
-    
-        let skinColor = '#FAD9C5'; 
-        let hair = '';
-        let bodyBaseColor = professor.color;
-        let accessory = ''; 
-        let features = ''; 
+let skinColor = '#FAD9C5';
+let hair = '';
+let bodyBaseColor = professor.color; // Asume que 'professor.color' ya está definido o se manejará en el default
+let accessory = '';
+let features = '';
 
 
-        switch (professor.subject.toLowerCase()) {
-            case "visualización datos":
-            case "diseño":
-                bodyBaseColor = '#8D40C4'; 
-                accessory = `
-                    <circle cx="50" cy="40" r="25" fill="none" stroke="#fff" stroke-width="2"/>
+switch (professor.subject.toLowerCase()) {
+    case "visualización datos":
+    case "diseño":
+        bodyBaseColor = '#8D40C4';
+        accessory = `
+            <circle cx="50" cy="40" r="25" fill="none" stroke="#fff" stroke-width="2"/>
 
-                    <text x="50" y="75" font-family="Arial" font-size="10" fill="#fff" text-anchor="middle">📊</text>
-                `; 
-                if (professor.gender === "female") {
-                    hair = `
-                        <path d="M20 25 C 5 20, 5 60, 20 65 C 35 70, 65 70, 80 65 C 95 60, 95 20, 80 25 Z" fill="#6A0572"/>
-                    `; 
-                } else {
-                    hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`; 
-                }
-                break;
-            case "tecnología digital iii":
-            case "tecnología digital 3":
-            case "td2":
-                bodyBaseColor = '#2ECC71'; 
-                accessory = `<rect x="30" y="35" width="40" height="15" rx="5" ry="5" fill="#333"/><circle cx="50" cy="42.5" r="3" fill="#00ffcc"/>`; // Anteojos
-                features += `<path d="M 40 50 L 45 55 L 55 55 L 60 50" stroke="#333" stroke-width="2" fill="none"/>`; 
-                if (professor.gender === "female") {
-                     hair = `<path d="M25 25 C 10 20, 10 55, 25 60 C 40 65, 60 65, 75 60 C 90 55, 90 20, 75 25" fill="#A0522D"/>`; 
-                } else {
-                    hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`;
-                }
-                break;
-            case "matemática":
-            case "matemática ii":
-            case "álgebra lineal":
-            case "contabilidad":
-                bodyBaseColor = '#3498DB'; 
-                if (professor.name === "Nicolas Allo Gomez") { 
-                    bodyBaseColor = '#F39C12'; 
-                }
-                if (professor.gender === "female") {
-                     hair = `<path d="M25 25 C 10 20, 10 55, 25 60 C 40 65, 60 65, 75 60 C 90 55, 90 20, 75 25" fill="#A0522D"/>`; 
-                } else {
-                    hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`; 
-                }
-                break;
-            case "microeconomía":
-            case "economía":
-            case "gestión proyectos":
-                bodyBaseColor = '#E74C3C'; 
-                 if (professor.gender === "female") {
-                     hair = `<path d="M25 25 C 10 20, 10 55, 25 60 C 40 65, 60 65, 75 60 C 90 55, 90 20, 75 25" fill="#A0522D"/>`; 
-                } else {
-                    hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`; 
-                }
-                break;
-            case "expresión oral y escrita":
-            case "comprensión de textos":
-            case "historia occidental":
-                bodyBaseColor = '#9B59B6'; 
-                if (professor.gender === "female") {
-                    hair = `
-                        <path d="M25 20 C 10 15, 10 60, 25 65 C 40 70, 60 70, 75 65 C 90 60, 90 15, 75 20 Z" fill="#8E44AD"/>
-                        <path d="M25 20 C 20 15, 20 50, 25 55 C 40 60, 60 60, 75 55 C 80 35, 70 15, 65 20" fill="#8E44AD" opacity="0.8"/>
-                    `; 
-                } else {
-                    hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`; 
-                }
-                break;
-            default:
-                bodyBaseColor = professor.color; 
-                if (professor.gender === "female") {
-                     hair = `<path d="M25 25 C 10 20, 10 55, 25 60 C 40 65, 60 65, 75 60 C 90 55, 90 20, 75 25" fill="#A0522D"/>`;
-                } else {
-                    hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`;
-                }
-                break;
-        }
-
-    
-        const eyes = `<circle cx="40" cy="35" r="5" fill="#333"/><circle cx="60" cy="35" r="5" fill="#333"/>`;
-        const mouth = `<path d="M 40 50 Q 50 55 60 50" stroke="#333" stroke-width="3" fill="none"/>`;
-
-        return `
-            <svg viewBox="0 0 100 100" style="width: 100%; height: 100%;">
-                ${hair}
-                <circle cx="50" cy="40" r="20" fill="${skinColor}"/>
-                <rect x="30" y="60" width="40" height="30" rx="10" ry="10" fill="${bodyBaseColor}"/>
-                ${eyes}
-                ${mouth}
-                ${accessory}
-                ${features}
-            </svg>
+            <text x="50" y="75" font-family="Arial" font-size="10" fill="#fff" text-anchor="middle">📊</text>
         `;
+        if (professor.gender === "female") {
+            hair = `
+                <path d="M20 25 C 5 20, 5 60, 20 65 C 35 70, 65 70, 80 65 C 95 60, 95 20, 80 25 Z" fill="#6A0572"/>
+            `;
+        } else {
+            hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`;
+        }
+        break;
+    case "tecnología digital iii":
+    case "tecnología digital 3":
+    case "td2":
+        bodyBaseColor = '#2ECC71';
+        accessory = `<rect x="30" y="35" width="40" height="15" rx="5" ry="5" fill="#333"/><circle cx="50" cy="42.5" r="3" fill="#00ffcc"/>`; // Anteojos
+        features += `<path d="M 40 50 L 45 55 L 55 55 L 60 50" stroke="#333" stroke-width="2" fill="none"/>`;
+        if (professor.gender === "female") {
+                hair = `<path d="M25 25 C 10 20, 10 55, 25 60 C 40 65, 60 65, 75 60 C 90 55, 90 20, 75 25" fill="#A0522D"/>`;
+        } else {
+            hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`;
+        }
+        break;
+    case "matemática":
+    case "matemática ii":
+    case "álgebra lineal":
+    case "contabilidad":
+        bodyBaseColor = '#3498DB';
+        if (professor.name === "Nicolas Allo Gomez") {
+            bodyBaseColor = '#F39C12';
+        }
+        if (professor.gender === "female") {
+                hair = `<path d="M25 25 C 10 20, 10 55, 25 60 C 40 65, 60 65, 75 60 C 90 55, 90 20, 75 25" fill="#A0522D"/>`;
+        } else {
+            hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`;
+        }
+        break;
+        
+        case "microeconomía":
+        case "economía":
+            bodyBaseColor = '#3498DB'; // Un azul moderno y corporativo
+            accessory = `
+                <polygon points="50,60 47,75 53,75" fill="#2980B9"/>
+                <path d="M40 30 L45 25 L50 30 L55 25 L60 30" stroke="#F1C40F" stroke-width="2" fill="none"/>
+            `;
+            // Anteojos de diseño moderno, finos y con un toque de color
+            features = `
+                <line x1="42" y1="35" x2="58" y2="35" stroke="#7F8C8D" stroke-width="1.5"/> <rect x="35" y="30" width="15" height="10" fill="rgba(0,0,0,0.1)" stroke="#7F8C8D" stroke-width="0.8" rx="2" ry="2"/>
+                <rect x="50" y="30" width="15" height="10" fill="rgba(0,0,0,0.1)" stroke="#7F8C8D" stroke-width="0.8" rx="2" ry="2"/>
+            `;
+
+            if (professor.gender === "female") {
+                // Pelo moderno con bob o corte simétrico
+                hair = `<path d="M20 30 C 20 10, 80 10, 80 30 C 80 50, 70 70, 50 70 C 30 70, 20 50, 20 30 Z" fill="#34495E"/>`; // Gris azulado oscuro, moderno
+            } else {
+                // Pelo corto con textura o un flequillo moderno
+                hair = `<path d="M30 20 Q 50 10 70 20 C 75 30, 75 50, 70 60 Q 50 70 30 60 C 25 50, 25 30, 30 20 Z" fill="#2C3E50"/>`; // Gris oscuro/negro moderno
+            }
+            break;
+
+        case "gestión proyectos":
+            bodyBaseColor = '#2ECC71'; // Un verde vibrante, asociado con crecimiento y éxito empresarial
+            accessory = `
+                <rect x="65" y="45" width="18" height="15" fill="#8B4513" rx="3" ry="3"/>
+                <line x1="68" y1="45" x2="68" y2="60" stroke="#654321" stroke-width="1.5" />
+                <path d="M40 25 L45 20 L55 20 L60 25 L55 30 L45 30 Z" fill="#F1C40F" stroke="#B7950B" stroke-width="1.5"/>
+                <circle cx="42.5" cy="27.5" r="2" fill="#B7950B"/>
+                <circle cx="57.5" cy="27.5" r="2" fill="#B7950B"/>
+            `;
+            // Lentes con un toque más moderno o robusto (si aplica)
+            features = `
+                <line x1="42" y1="35" x2="58" y2="35" stroke="#555" stroke-width="2"/>
+                <rect x="35" y="30" width="15" height="10" fill="rgba(0,0,0,0.15)" stroke="#555" stroke-width="1"/>
+                <rect x="50" y="30" width="15" height="10" fill="rgba(0,0,0,0.15)" stroke="#555" stroke-width="1"/>
+            `;
+
+            if (professor.gender === "female") {
+                // Pelo profesional y dinámico para mujer
+                hair = `<path d="M25 20 C 15 5, 15 70, 25 80 C 40 85, 60 85, 75 80 C 85 70, 85 5, 75 20 Z" fill="#6A0572"/>`; // Podría ser un recogido o corte moderno
+            } else {
+                // Pelo corto y bien peinado, clásico de empresario
+                hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#2C3E50"/>`; // Negro o muy oscuro
+            }
+            break;
+
+    
+        case "expresión oral y escrita":
+        case "comprensión de textos":
+            bodyBaseColor = '#9B59B6'; // Morado, un color que evoca creatividad y conocimiento.
+            accessory = `
+                <rect x="65" y="20" width="18" height="25" fill="#F0E68C" stroke="#8B4513" stroke-width="1.5" rx="2" ry="2"/>
+                <text x="74" y="36" font-family="Arial" font-size="9" fill="#333" text-anchor="middle">📚</text>
+                <line x1="42" y1="35" x2="58" y2="35" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="35" y="30" width="15" height="10" fill="rgba(0,0,0,0.2)" stroke="#333" stroke-width="1"/>
+                <rect x="50" y="30" width="15" height="10" fill="rgba(0,0,0,0.2)" stroke="#333" stroke-width="1"/>
+            `;
+            // Los anteojos se superponen sobre los ojos definidos al final de la función
+            features = ''; // Limpiamos cualquier otra feature si no es necesaria.
+
+            if (professor.gender === "female") {
+                // Nuevo peinado femenino más común y menos "raro"
+                hair = `
+                    <path d="M20 20 Q 50 0 80 20 C 85 40, 85 60, 80 80 H 20 C 15 60, 15 40, 20 20 Z" fill="#4B382D"/>
+                    <path d="M25 25 C 20 35, 20 45, 25 55 C 30 65, 70 65, 75 55 C 80 45, 80 35, 75 25" fill="#4B382D" opacity="0.6"/>
+                `; // Un pelo más voluminoso y menos "plano"
+            } else {
+                hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`; // Pelo masculino genérico
+            }
+            break;
+
+        case "historia occidental":
+            bodyBaseColor = '#A0522D'; // Un color más terroso o histórico (marrón)
+            accessory = `
+                <circle cx="50" cy="25" r="10" fill="#F4D03F" stroke="#B7950B" stroke-width="2"/>
+                <line x1="50" y1="20" x2="50" y2="30" stroke="#B7950B" stroke-width="2"/>
+                <line x1="45" y1="25" x2="55" y2="25" stroke="#B7950B" stroke-width="2"/>
+                <text x="50" y="45" font-family="Arial" font-size="12" fill="#333" text-anchor="middle">🏛️</text>
+            `;
+            features = '';
+            if (professor.gender === "female") {
+                // Pelo blanco para mujer
+                hair = `<path d="M25 25 C 10 20, 10 55, 25 60 C 40 65, 60 65, 75 60 C 90 55, 90 20, 75 25" fill="#F5F5DC"/>`; // Blanco/Blanquecino
+            } else {
+                // Pelo blanco para hombre
+                hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#F5F5DC"/>`; // Blanco/Blanquecino
+            }
+            break;
+
+        case "neurociencias": // NUEVO CASO PARA NEUROCIENCIAS (más intelectual, sin tapar la cara)
+    bodyBaseColor = '#34495E'; // Un color gris/azul oscuro/morado, que puede evocar la ciencia o el pensamiento
+    // Un símbolo más abstracto y "flotante" para la intelectualidad/pensamiento
+    accessory = `
+        <circle cx="50" cy="25" r="5" fill="#ADD8E6" /> <line x1="50" y1="25" x2="40" y2="15" stroke="#ADD8E6" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="50" y1="25" x2="60" y2="15" stroke="#ADD8E6" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="50" y1="25" x2="35" y2="35" stroke="#ADD8E6" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="50" y1="25" x2="65" y2="35" stroke="#ADD8E6" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="40" cy="15" r="3" fill="#ADD8E6" />
+        <circle cx="60" cy="15" r="3" fill="#ADD8E6" />
+        <circle cx="35" cy="35" r="3" fill="#ADD8E6" />
+        <circle cx="65" cy="35" r="3" fill="#ADD8E6" />
+    `; // Simboliza conexiones neuronales o ideas interconectadas. Posicionado arriba de la cabeza.
+    features = ''; // No necesitamos features extra aquí, el accessory ya es el foco.
+
+    if (professor.gender === "female") {
+        hair = `<path d="M25 25 C 10 20, 10 55, 25 60 C 40 65, 60 65, 75 60 C 90 55, 90 20, 75 25" fill="#A0522D"/>`; // Pelo femenino genérico
+    } else {
+        hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`; // Pelo masculino genérico
     }
+    break;
+    default: // Para cualquier otra materia no definida explícitamente
+        bodyBaseColor = professor.color || '#7F8C8D'; // Color por defecto si no hay uno definido
+        if (professor.gender === "female") {
+                hair = `<path d="M25 25 C 10 20, 10 55, 25 60 C 40 65, 60 65, 75 60 C 90 55, 90 20, 75 25" fill="#A0522D"/>`;
+        } else {
+            hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`;
+        }
+        break;
+}
 
-   // Pasaje de profesores
-    function nextAvatar() {
-        currentAvatarIndex = (currentAvatarIndex + 1) % professorAvatars.length;
-    }
 
-    function prevAvatar() {
-        currentAvatarIndex = (currentAvatarIndex - 1 + professorAvatars.length) % professorAvatars.length;
-    }
+const eyes = `<circle cx="40" cy="35" r="5" fill="#333"/><circle cx="60" cy="35" r="5" fill="#333"/>`;
+const mouth = `<path d="M 40 50 Q 50 55 60 50" stroke="#333" stroke-width="3" fill="none"/>`;
 
+return `
+    <svg viewBox="0 0 100 100" style="width: 100%; height: 100%;">
+        ${hair}
+        <circle cx="50" cy="40" r="20" fill="${skinColor}"/>
+        <rect x="30" y="60" width="40" height="30" rx="10" ry="10" fill="${bodyBaseColor}"/>
+        ${eyes}
+        ${mouth}
+        ${accessory}
+        ${features}
+    </svg>
+`;
+}
 
+// Pasaje de profesores (Estas funciones no necesitan cambios)
+function nextAvatar() {
+currentAvatarIndex = (currentAvatarIndex + 1) % professorAvatars.length;
+}
+
+function prevAvatar() {
+currentAvatarIndex = (currentAvatarIndex - 1 + professorAvatars.length) % professorAvatars.length;
+}
     // Cuando el componente se monta, asegura que el scroll-container tenga la propiedad de scroll snap
     onMount(() => {
         const scrollContainer = document.querySelector('.scroll-container');
@@ -509,12 +598,11 @@ function getRankedStars() {
             {/each}
 
             {#each displayedStars as star (star.id)}
-                <button
-                    class="star-container {isFavorite(star) ? 'favorite-glow' : ''}"
-                    style="top: {star.y}vh; left: {star.x}vw"
-                    on:click={() => openProfessorDetails(star)}
-                    aria-label={`Ver detalles de ${star.name}, Puntaje ${star.like}`}
-                >
+            <button
+            class="star-container {isFavorite(star) ? 'favorite-glow' : ''}"
+            style="top: {star.y}%; left: {star.x}%" on:click={() => openProfessorDetails(star)}
+            aria-label={`Ver detalles de ${star.name}, Puntaje ${star.like}`}
+        >
                     <svg
                         class="star"
                         width="{starSize(star.like, undefined)}"
@@ -532,12 +620,11 @@ function getRankedStars() {
 
         <div id="top-professors-overlay" class="ranked-stars-container" class:visible={isTopProfessorsMode}>
             {#each getRankedStars() as star (star.id)}
-                <button
-                    class="star-container ranked-star {isFavorite(star) ? 'favorite-glow' : ''}"
-                    style="top: {star.y}vh; left: {star.x}vw"
-                    on:click={() => openProfessorDetails(star)}
-                    aria-label={`Ver detalles de ${star.name}, Ranking ${star.rank}`}
-                >
+            <button
+    class="star-container ranked-star {isFavorite(star) ? 'favorite-glow' : ''}"
+    style="top: {star.y}%; left: {star.x}%" on:click={() => openProfessorDetails(star)}
+    aria-label={`Ver detalles de ${star.name}, Ranking ${star.rank}`}
+>
                     <svg class="star"
                         width="{starSize(star.like, star.rank)}"
                         height="{starSize(star.like, star.rank)}"

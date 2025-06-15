@@ -20,13 +20,14 @@ body {
     font-family: var(--primary-font);
     background-color: var(--bg-color);
     color: var(--text-color);
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 
 
 .scroll-container {
     height: 100vh;
+    width: 100vw;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     -webkit-overflow-scrolling: touch; 
@@ -36,6 +37,7 @@ body {
 
 .scroll-section {
     height: 100vh;
+    width: 100vw; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -65,7 +67,7 @@ body {
 /* Botones de Control (filtros) */
 .controls {
     position: fixed;
-    bottom: 20px;
+    bottom: 35px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -182,6 +184,8 @@ body {
 .galaxy-container {
     position: absolute;
     width: 100%;
+    top:0;
+    left:0;
     height: 100%;
     display: block; 
     opacity: 1;
@@ -557,7 +561,7 @@ body {
     justify-content: center;
     align-items: center;
     scroll-snap-align: start;
-    padding-bottom: 50px; 
+    padding-bottom: 70px; 
     box-sizing: border-box; 
 }
 
