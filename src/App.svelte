@@ -79,6 +79,8 @@
         { id: 11, name: "David Laviosa", subject: "Gestión Proyectos", year: 2025, like: 7, difficulty: 2, recommended: "Sí", mood: "Interesante", x: 70, y: 56.5, gender: "male",
             description: "Trabaja en PedidosYA, me enseñándote metodologías para armar una buena empresa, desde la planificación hasta la ejecución.",
             phrase: "La clave del éxito reside en una gestión impecable." },
+            { id: 23, name: "Fabrizio Rodriguez", subject: "Microeconomía", year: 2024, like: 7, difficulty: 7, recommended: "Sí", mood: "Interesante", x: 80, y: 56.5, gender: "male",
+            description: "Es un docente amable y dedicado, que genera un ambiente interesante donde los estudiantes se sienten apoyados para aprender y crecer.", phrase: "Un uruguayo en Ditella"},
 
         // LIKE 6: (Usar 65 para todas)
         { id: 21, name: "Fernanda Milman", subject: "Contabilidad", year: 2024, like: 6, difficulty: 6, recommended: "No", mood: "Interesante", x: 45, y: 65, gender: "female",
