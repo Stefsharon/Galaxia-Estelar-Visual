@@ -88,16 +88,16 @@
             phrase: "Los balances son el pulso de la empresa." },
 
         // LIKE < 6 (Usar 74.5 para todas)
-        { id: 8, name: "David Gonzalez", subject: "TD2", year: 2023, like: 5, difficulty: 9, recommended: "No", mood: "Aburrido", x: 25, y: 74.5, gender: "male",
+        { id: 8, name: "David Gonzalez", subject: "TD2", year: 2023, like: 5, difficulty: 9, recommended: "No", mood: "Exigente", x: 25, y: 74.5, gender: "male",
             description: "Un profesor que te desafiará con la complejidad de la Tecnología Digital 2, requiriendo mucha dedicación para dominarla.",
             phrase: "La tecnología exige disciplina y estudio constante." },
-        { id: 14, name: "Martín Vacas", subject: "Matemática", year: 2023, like: 3, difficulty: 4, recommended: "No", mood: "Aburrido", x: 40, y: 74.5, gender: "male",
+        { id: 14, name: "Martín Vacas", subject: "Matemática", year: 2023, like: 3, difficulty: 4, recommended: "No", mood: "Exigente", x: 40, y: 74.5, gender: "male",
             description: "Sus clases de matemática se entienden, pero no tiene onda para explicar.",
             phrase: "Siempre tomando mate." },
-        { id: 7, name: "Pablo Dobrusin", subject: "TD2", year: 2023, like: 2, difficulty: 8, recommended: "No", mood: "Aburrido", x: 60, y: 74.5, gender: "male",
+        { id: 7, name: "Pablo Dobrusin", subject: "TD2", year: 2023, like: 2, difficulty: 8, recommended: "No", mood:"Exigente", x: 60, y: 74.5, gender: "male",
             description: "La materia con este profesor puede ser un verdadero reto. Prepárate para un aprendizaje exclusivamente autónomo.",
             phrase: "El camino del conocimiento es a menudo solitario." },
-        { id: 10, name: "Gabriela Spinetto", subject: "Diseño", year: 2022, like: 2, difficulty: 6, recommended: "No", mood: "Aburrido", x: 80, y: 74.5, gender: "female",
+        { id: 10, name: "Gabriela Spinetto", subject: "Diseño", year: 2022, like: 2, difficulty: 6, recommended: "No", mood: "Exigente", x: 80, y: 74.5, gender: "female",
             description: "Sus clases de diseño son menos dinámicas de lo esperado, lo que puede dificultar la inspiración creativa.",
             phrase: "La creatividad necesita chispa, no solo reglas." },
     ];
@@ -211,7 +211,7 @@ $: displayedStars = (() => {
         switch (star.mood.toLowerCase()) {
             case "divertido": return "#00ffcc";
             case "interesante": return "#ffd700";
-            case "aburrido": return "#ff69b4";
+            case "exigente": return "#ff69b4";
             default:
                 if (star.recommended === "No") return "#666";
                 return "#ccc";
@@ -651,7 +651,7 @@ currentAvatarIndex = (currentAvatarIndex - 1 + professorAvatars.length) % profes
                     </div>
                     <div class="mood-item">
                         <svg class="reference-star star-boring" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L14.09 8.26H20.82L15.36 12.14L17.45 18.4L12 14.52L6.55 18.4L8.64 12.14L3.18 8.26H9.91L12 2Z"/></svg>
-                        <span style="color: #FF69B4;">Aburrido</span>
+                        <span style="color: #FF69B4;">Exigente</span>
                     </div>
                 </div>
 
