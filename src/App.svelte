@@ -324,20 +324,48 @@ let features = '';
 switch (professor.subject.toLowerCase()) {
     case "visualización datos":
     case "diseño":
-        bodyBaseColor = '#8D40C4';
-        accessory = `
-            <circle cx="50" cy="40" r="25" fill="none" stroke="#fff" stroke-width="2"/>
+    bodyBaseColor = '#8D40C4';
 
-            <text x="50" y="75" font-family="Arial" font-size="10" fill="#fff" text-anchor="middle">📊</text>
+    // Accesorio visual base
+    accessory = `
+        <circle cx="50" cy="40" r="25" fill="none" stroke="#fff" stroke-width="2"/>
+        <text x="50" y="75" font-family="Arial" font-size="10" fill="#fff" text-anchor="middle">📊</text>
+    `;
+
+    if (professor.gender === "female") {
+        // Pelo largo, prolijo y con ondas suaves ☁️
+        hair = `
+            <path d="M30 20 C 20 30, 15 50, 25 65 C 35 80, 65 80, 75 65 C 85 50, 80 30, 70 20 Q 50 5, 30 20 Z" fill="#1C1C1C"/>
         `;
-        if (professor.gender === "female") {
-            hair = `
-                <path d="M20 25 C 5 20, 5 60, 20 65 C 35 70, 65 70, 80 65 C 95 60, 95 20, 80 25 Z" fill="#6A0572"/>
-            `;
-        } else {
-            hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`;
-        }
-        break;
+
+        // Anteojos ovalados elegantes 🕶️✨
+        accessory += `
+            <ellipse cx="35" cy="40" rx="6" ry="4" fill="black"/>
+            <ellipse cx="65" cy="40" rx="6" ry="4" fill="black"/>
+            <line x1="41" y1="40" x2="59" y2="40" stroke="black" stroke-width="2"/>
+            <line x1="29" y1="40" x2="25" y2="38" stroke="black" stroke-width="2"/>
+            <line x1="71" y1="40" x2="75" y2="38" stroke="black" stroke-width="2"/>
+        `;
+    } else {
+        // Pelo corto con onda (para el varón)
+        hair = `
+            <path d="M25 25 C 30 10, 70 10, 75 25 C 80 40, 80 60, 70 65 C 60 70, 40 70, 30 65 C 20 60, 20 40, 25 25 Z" fill="#1C1C1C"/>
+        `;
+
+        // Anteojos rectangulares cancheros 😎
+        accessory += `
+            <rect x="30" y="35" width="15" height="10" fill="black" rx="2" ry="2"/>
+            <rect x="55" y="35" width="15" height="10" fill="black" rx="2" ry="2"/>
+            <line x1="45" y1="40" x2="55" y2="40" stroke="black" stroke-width="2"/>
+            <line x1="30" y1="40" x2="25" y2="38" stroke="black" stroke-width="2"/>
+            <line x1="70" y1="40" x2="75" y2="38" stroke="black" stroke-width="2"/>
+        `;
+    }
+
+    break;
+
+
+
     case "tecnología digital iii":
     case "tecnología digital 3":
     case "td2":
@@ -350,20 +378,90 @@ switch (professor.subject.toLowerCase()) {
             hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`;
         }
         break;
-    case "matemática":
-    case "matemática ii":
-    case "álgebra lineal":
+        case "matemática":
+case "matemática ii":
+case "álgebra lineal":
+    bodyBaseColor = '#3498DB'; // Azul clásico matemático
+
+    // Color especial para Nico Allo
+    if (professor.name === "Nicolas Allo Gomez") {
+        bodyBaseColor = '#F39C12'; // Dorado brillante
+    }
+
+    // Inicialización
+    hair = "";
+    accessory = "";
+
+    // Estilos por género
+    if (professor.gender === "female") {
+        // Pelo con forma natural y cálida
+        hair = `
+            <path d="M25 20 C 10 25, 10 55, 25 65 Q 50 80, 75 65 C 90 55, 90 25, 75 20 Q 65 15, 50 15 Q 35 15, 25 20 Z" fill="#6E4F3A"/>
+        `;
+
+        // Lentes redondos, suaves y elegantes
+        accessory = `
+            <circle cx="36" cy="40" r="7" fill="none" stroke="#5D6D7E" stroke-width="2"/>
+            <circle cx="64" cy="40" r="7" fill="none" stroke="#5D6D7E" stroke-width="2"/>
+            <line x1="43" y1="40" x2="57" y2="40" stroke="#5D6D7E" stroke-width="1.5"/>
+        `;
+    } else {
+        // Pelo masculino clásico
+        hair = `
+            <path d="M30 20 Q 50 8, 70 20 C 75 35, 75 50, 70 60 Q 50 72, 30 60 C 25 50, 25 35, 30 20 Z" fill="#3E2F1C"/>
+        `;
+
+        // Lentes rectangulares
+        accessory = `
+            <rect x="30" y="35" width="16" height="10" fill="none" stroke="black" stroke-width="2"/>
+            <rect x="54" y="35" width="16" height="10" fill="none" stroke="black" stroke-width="2"/>
+            <line x1="46" y1="40" x2="54" y2="40" stroke="black" stroke-width="2"/>
+        `;
+    }
+
+    // 💥 Pelo rojo especial para Nico
+    if (professor.name === "Nicolas Allo Gomez") {
+        hair = `
+            <path d="M30 20 Q 50 8, 70 20 C 75 35, 75 50, 70 60 Q 50 72, 30 60 C 25 50, 25 35, 30 20 Z" fill="#E74C3C"/>
+        `;
+    }
+
+    break;
+
     case "contabilidad":
-        bodyBaseColor = '#3498DB';
-        if (professor.name === "Nicolas Allo Gomez") {
-            bodyBaseColor = '#F39C12';
-        }
-        if (professor.gender === "female") {
-                hair = `<path d="M25 25 C 10 20, 10 55, 25 60 C 40 65, 60 65, 75 60 C 90 55, 90 20, 75 25" fill="#A0522D"/>`;
-        } else {
-            hair = `<path d="M30 20 Q 50 5 70 20 C 75 30, 75 50, 70 60 Q 50 75 30 60 C 25 50, 25 30, 30 20 Z" fill="#4B382D"/>`;
-        }
-        break;
+    bodyBaseColor = '#1ABC9C'; // Un verde agua profesional y fresco
+
+    // Inicialización de elementos
+    hair = "";
+    accessory = "";
+
+    if (professor.gender === "female") {
+        // Pelo suelto liso con estilo práctico
+        hair = `
+            <path d="M20 25 C 15 15, 85 15, 80 25 C 85 40, 85 55, 75 65 C 65 70, 35 70, 25 65 C 15 55, 15 40, 20 25 Z" fill="#5D4037"/>
+        `;
+
+        // Lentes con marco de color (onda sofisticada)
+        accessory = `
+            <rect x="28" y="35" width="14" height="10" fill="none" stroke="#8E44AD" stroke-width="2"/>
+            <rect x="58" y="35" width="14" height="10" fill="none" stroke="#8E44AD" stroke-width="2"/>
+            <line x1="42" y1="40" x2="58" y2="40" stroke="#8E44AD" stroke-width="2"/>
+        `;
+    } else {
+        // Pelo corto peinado, estilo contador prolijo
+        hair = `
+            <path d="M30 20 Q 50 10, 70 20 C 72 35, 72 50, 68 60 Q 50 70, 32 60 C 28 50, 28 35, 30 20 Z" fill="#3B2F2F"/>
+        `;
+
+        // Lentes tipo ejecutivos, más finos
+        accessory = `
+            <line x1="32" y1="40" x2="44" y2="40" stroke="#2C3E50" stroke-width="2"/>
+            <line x1="56" y1="40" x2="68" y2="40" stroke="#2C3E50" stroke-width="2"/>
+            <line x1="44" y1="40" x2="56" y2="40" stroke="#2C3E50" stroke-width="1"/>
+        `;
+    }
+
+    break;
         
         case "microeconomía":
         case "economía":
@@ -593,7 +691,7 @@ currentAvatarIndex = (currentAvatarIndex - 1 + professorAvatars.length) % profes
         <div class="galaxy-container" class:hidden={isTopProfessorsMode}>
             {#each Object.entries(scoreYPositions) as [scoreGroup, yPos]}
                 <div class="score-label" style="top: {yPos}vh;">
-                    {scoreGroup === '<6' ? 'No Recomendados' : `Puntaje ${scoreGroup}`}
+                    {scoreGroup === '<6' ? 'No Elegidos' : `Puntaje ${scoreGroup}`}
                 </div>
             {/each}
 
@@ -642,8 +740,8 @@ currentAvatarIndex = (currentAvatarIndex - 1 + professorAvatars.length) % profes
 
         <div class="controls">
             <button on:click={() => setFilter("all")} class:active={filter === "all" && filterSubject === "all"}>🌌 Todos</button>
-            <button on:click={() => setFilter("liked")} class:active={filter === "liked"}>💚 Recomendados</button>
-            <button on:click={() => setFilter("disliked")} class:active={filter === "disliked"}>💔 No Recomendados</button>
+            <button on:click={() => setFilter("liked")} class:active={filter === "liked"}>💚 Elegidos</button>
+            <button on:click={() => setFilter("disliked")} class:active={filter === "disliked"}>💔 No Elegidos</button>
         </div>
     </section>
 

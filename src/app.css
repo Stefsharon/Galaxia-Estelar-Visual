@@ -320,13 +320,13 @@ body {
 
 .ranked-stars-container {
     position: absolute;
-    top: 10vh;
+    top: 50vh;
     left: -20vw;
     width: 100%;
     display: flex;
     justify-content:flex-start;
     align-items: center;
-    gap: 10px; /* Espacio entre las estrellas del Top 4 */
+    gap: -15px; /* Espacio entre las estrellas del Top 4 */
     opacity: 0;
     transition: opacity 0.5s ease, z-index 0.5s ease;
     pointer-events: none;
