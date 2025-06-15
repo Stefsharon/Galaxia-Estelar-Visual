@@ -1,0 +1,665 @@
+
+/* Efectos visuales para que se vea más linda la página */
+:root {
+    --primary-font: 'Orbitron', sans-serif;
+    --text-color: #e0e0e0;
+    --bg-color: #0d0d1a;
+    --star-fun: #00ffcc;
+    --star-interesting: #ffd700;
+    --star-boring: #ff69b4;
+    --button-bg: #333;
+    --button-hover-bg: #555;
+    --button-active-bg: #00ffcc;
+    --modal-bg: rgba(20, 20, 40, 0.95);
+    --border-color: #00ffcc;
+    --glow-color: #ffcc00;
+}
+
+body {
+    margin: 0;
+    font-family: var(--primary-font);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden;
+}
+
+
+
+.scroll-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch; 
+    position: relative;
+    z-index: 1; /* Asegura que esté por encima de las estrellas de fondo */
+}
+
+.scroll-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    scroll-snap-align: start;
+    position: relative; /* Necesario para posicionar elementos internos */
+}
+
+/* Galaxy Intro Section */
+#galaxy-intro {
+    background: linear-gradient(180deg, #0d0d1a 0%, #2a0a3a 100%);
+}
+
+.galaxy-title {
+    font-size: 1.8em;
+    color: #fff;
+    text-shadow: 0 0 15px var(--glow-color);
+    margin-bottom: 500px;
+    line-height: 1.4;
+}
+
+
+
+/* Botones de Control (filtros) */
+.controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+    
+    padding: px 20px;
+    border-radius: 25px;
+   
+}
+
+.controls button {
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--primary-font);
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.controls button:hover {
+    background-color: var(--button-hover-bg);
+    box-shadow: 0 0 8px var(--border-color);
+}
+
+.controls button.active {
+    background-color: var(--button-active-bg);
+    color: #000;
+    border-color: var(--button-active-bg);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--button-active-bg);
+}
+
+/* Referencias de algunas categorías */
+.references-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 50;
+}
+
+.toggle-legend-button {
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--primary-font);
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.toggle-legend-button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.legend-content {
+    background-color: var(--modal-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    max-width: 250px;
+    text-align: left;
+}
+
+.references-container.visible .legend-content {
+    display: flex;
+    opacity: 1;
+}
+
+.reference-section {
+    padding-bottom: 10px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+.reference-section:last-child {
+    border-bottom: none;
+}
+
+.reference-section span {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.mood-item, .like-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.reference-star {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.star-fun { fill: var(--star-fun); }
+.star-interesting { fill: var(--star-interesting); }
+.star-boring { fill: var(--star-boring); }
+
+/* Contenedor de Galaxia y Estrellas */
+.galaxy-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block; 
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.galaxy-container.hidden {
+    opacity: 0;
+    pointer-events: none; /* Deshabilita interacciones cuando está oculto */
+}
+
+.star-container {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.star-container:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    filter: brightness(1.2);
+}
+
+.star {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    transition: fill 0.3s ease;
+}
+
+.favorite-glow .star {
+    filter: drop-shadow(0 0 10px var(--glow-color)) drop-shadow(0 0 20px rgba(255, 204, 0, 0.4));
+}
+
+.score-label {
+    position: absolute;
+    left: 5%;
+    transform: translateY(-50%);
+    font-size: 1.1em;
+    color: #ccc;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 5;
+}
+
+/* Modal de Detalles del Profesor (Estrella) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--modal-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 15px;
+    padding: 30px;
+    color: var(--text-color);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+}
+
+.modal-content h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.modal-content p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--border-color);
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.2s ease;
+}
+
+.close-button:hover {
+    color: #fff;
+}
+
+/* Top Professors Overlay */
+.top-professors-toggle {
+    position: fixed;
+    top: 40px;
+    left: 20px;
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    border: 1px solid #ffd700;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: var(--primary-font);
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.top-professors-toggle:hover {
+    background-color: var(--button-hover-bg);
+    box-shadow: 0 0 10px #ffd700;
+}
+
+.ranked-stars-container {
+    position: absolute;
+    top: 10vh;
+    left: -20vw;
+    width: 100%;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    gap: 10px; /* Espacio entre las estrellas del Top 4 */
+    opacity: 0;
+    transition: opacity 0.5s ease, z-index 0.5s ease;
+    pointer-events: none;
+}
+/* Estilos para el texto del ranking (1, 2, 3, 4) */
+.star-rank-number {
+    position: absolute;
+    top: 4vh; /* Ajusta según sea necesario para que esté encima de la estrella */
+    left: -20vw;
+    transform: translateX(-50%);
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5em; 
+    text-shadow: 0 0 5px #00ffcc;
+    z-index: 11; 
+}
+
+.ranked-stars-container.visible {
+    opacity: 1;
+    pointer-events: all; /* Habilita interacciones cuando es visible */
+   
+}
+
+.ranked-star {
+    transform: translate(-50%, -50%) scale(1); 
+    transition: transform 0.3s ease, filter 0.3s ease;
+    position: relative; /* Para el número */
+}
+
+.ranked-star:hover {
+    transform: translate(-50%, -50%) scale(1.1); /* Ligeramente más grande al hacer hover */
+}
+
+.rank-number {
+    position: absolute;
+    bottom: -20px; /* Posicionar debajo de la estrella */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 5px #000;
+}
+
+.top-star-medal {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+/* LA SECCIÓN DE AVATARES */
+.avatar-creator-section {
+    background: linear-gradient(180deg, #2a0a3a 0%, #0d0d1a 100%);
+}
+
+.avatar-carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%; 
+    max-width: 800px;
+    margin-top: 30px;
+    position: relative;
+}
+
+.avatar-display-area {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px; /* Altura fija para el área del avatar */
+    overflow: hidden; /* Asegura que solo se vea un avatar a la vez */
+    position: relative;
+}
+
+.professor-avatar-card {
+    width: 200px; /* Tamaño base del avatar visible */
+    height: 200px;
+    background-color: rgba(30, 30, 60, 0.7);
+    border: 2px solid var(--border-color);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.professor-avatar-card:hover {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 0 20px var(--border-color);
+}
+
+.professor-avatar-card svg {
+    width: 120px; 
+    height: 120px;
+    margin-bottom: 10px;
+}
+
+.professor-avatar-card h3 {
+    margin: 0;
+    font-size: 1.3em;
+    color: #fff;
+}
+
+.professor-avatar-card p {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+.carousel-arrow {
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5em;
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0; 
+}
+
+.carousel-arrow:hover {
+    background-color: var(--button-hover-bg);
+    box-shadow: 0 0 10px var(--border-color);
+}
+
+.carousel-arrow.left {
+    margin-right: 20px;
+}
+
+.carousel-arrow.right {
+    margin-left: 20px;
+}
+
+/* Modal de Detalles del Avatar */
+.avatar-modal-content {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    max-width: 700px; /* Aumenta el ancho para acomodar la imagen y la info */
+    text-align: left;
+}
+
+.avatar-detail-display {
+    width: 250px; /* Tamaño fijo para el SVG en el modal */
+    height: 250px;
+    flex-shrink: 0; /* Evita que se encoja */
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden; /* Asegura que el SVG no se salga */
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar-detail-display svg {
+    width: 100%; /* El SVG ocupa todo el contenedor */
+    height: 100%;
+    display: block; 
+}
+
+.avatar-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.avatar-info h3 {
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.avatar-info p {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.professor-phrase {
+    font-style: italic;
+    color: var(--star-interesting); /* Un color distintivo para la frase */
+    margin-top: 15px;
+    font-size: 1.2em;
+}
+
+/* Estilos para el editor de avatares (conceptual) */
+.avatar-customization-controls {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.avatar-customization-controls button {
+    background-color: #555;
+    color: #fff;
+    border: 1px solid #777;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--primary-font);
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+}
+
+.avatar-customization-controls button:hover {
+    background-color: #777;
+    border-color: var(--border-color);
+}
+
+
+#footer-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    padding-bottom: 50px; 
+    box-sizing: border-box; 
+}
+
+.main-footer {
+    background: none;
+    padding: 0; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.footer-button-content {
+    background-color: var(--button-bg); /* Color de fondo similar a los botones */
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 25px; 
+    padding: 10px 25px; 
+    text-align: center;
+    font-family: var(--primary-font);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    max-width: 350px; 
+    width: 90%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-button-content:hover {
+    background-color: var(--button-hover-bg);
+    box-shadow: 0 0 15px var(--border-color); /* Brillo al pasar el ratón */
+    transform: scale(1.02); 
+}
+
+.footer-call-to-action {
+    font-size: 1.1em; 
+    margin: 0; 
+    color: #fff; 
+    text-shadow: 0 0 8px var(--glow-color); 
+}
+
+
+.instagram-icon-footer-button {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+    fill: currentColor; 
+    margin-left: 8px; 
+}
+
+
+/* --- Nuevos estilos para el Modal de Steffy --- */
+.creator-modal-content {
+    background-color: var(--modal-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 25px; 
+    max-width: 450px; 
+    width: 90%;
+    position: relative;
+    color: var(--text-color);
+    box-shadow: 0 0 20px var(--glow-color);
+    text-align: center; 
+}
+
+.creator-modal-title {
+    font-size: 2.2em;
+    color: var(--glow-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.creator-modal-text {
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.creator-social-links {
+    margin-top: 15px;
+}
+
+.creator-social-links a {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    color: var(--text-color);
+}
+
+.creator-social-links a:hover {
+    transform: scale(1.4); 
+    color: var(--glow-color); 
+}
+
+.instagram-icon-large {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    fill: currentColor; 
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
