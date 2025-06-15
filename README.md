@@ -1,4 +1,4 @@
-# VD | Números
+
 
 # 🌌 Galaxia Estelar Visual
 
